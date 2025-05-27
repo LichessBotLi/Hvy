@@ -40,11 +40,12 @@ class Config:
                 print(f'There appears to be a syntax problem with your {yaml_path}', file=sys.stderr)
                 raise e
 
-        if 'token' not in yaml_config and 'LICHESS_BOT_TOKEN' in os.environ:
-            yaml_config['token'] = os.environ['LICHESS_BOT_TOKEN']
+        with open("key.txt", "r") as f:
+            yaml_config["token"] = f.read().strip()
 
         cls._check_sections(yaml_config)
-
+        return cls(**yaml_config)
+        
         engine_configs = cls._get_engine_configs(yaml_config['engines'])
         syzygy_config = cls._get_syzygy_configs(yaml_config['syzygy'])
         gaviota_config = cls._get_gaviota_config(yaml_config['gaviota'])
