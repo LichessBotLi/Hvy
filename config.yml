@@ -195,5 +195,5 @@ messages:
 #   - Username1
 #   - Username2
 
-books:                                    # Names of the opening books (to be used above in the opening_books section) and paths to the opening books.
-  DefaultBook: "/path/to/DefaultBook.bin"
+# books:                                    # Names of the opening books (to be used above in the opening_books section) and paths to the opening books.
+# DefaultBook: "/path/to/DefaultBook.bin"
