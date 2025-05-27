@@ -36,7 +36,5 @@ jobs:
       - name: Run a multi-line script
         run: |
           echo ${{ secrets.LICHESS_KEY }} > key.txt
-          chmod +x ./engines/fairy-stockfish-largeboard_x86-64  
-          chmod +x ./engines/stockfish-ubuntu-x86-64-sse41-popcnt
-          chmod +x ./engines/stockfish
+          chmod +x ./engines/stockfish1
           python3 user_interface.py
