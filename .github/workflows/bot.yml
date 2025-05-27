@@ -9,7 +9,7 @@ on:
     branches:
       - "main"
     paths:
-      - "lichess-bot.py"
+      - "user_interface.py"
   schedule:
     - cron: "1 */4 * * *"
 
