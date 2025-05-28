@@ -32,22 +32,19 @@ class Config:
     version: str
 
     @classmethod
-def from_yaml(cls, yaml_path: str) -> 'Config':
-    with open(yaml_path, encoding='utf-8') as yaml_input:
-        try:
-            yaml_config = yaml.safe_load(yaml_input)
-        except Exception as e:
-            print(f'There appears to be a syntax problem with your {yaml_path}', file=sys.stderr)
-            raise e
+    def from_yaml(cls, yaml_path: str) -> 'Config':
+        with open(yaml_path, encoding='utf-8') as yaml_input:
+            try:
+                yaml_config = yaml.safe_load(yaml_input)
+            except Exception as e:
+                print(f'There appears to be a syntax problem with your {yaml_path}', file=sys.stderr)
+                raise e
 
-    with open("key.txt", "r") as f:
-        yaml_config["token"] = f.read().strip()
+        if 'token' not in yaml_config and 'LICHESS_BOT_TOKEN' in os.environ:
+            yaml_config['token'] = os.environ['LICHESS_BOT_TOKEN']
 
-    cls._check_sections(yaml_config)
-    
-    # ✅ Create OmegaConf object instead of calling cls(...)
-    return OmegaConf.create(yaml_config)
-  
+        cls._check_sections(yaml_config)
+
         engine_configs = cls._get_engine_configs(yaml_config['engines'])
         syzygy_config = cls._get_syzygy_configs(yaml_config['syzygy'])
         gaviota_config = cls._get_gaviota_config(yaml_config['gaviota'])
